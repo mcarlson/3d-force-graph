@@ -204,7 +204,6 @@ export default Kapsule({
 
             const color = colorAccessor(node);
             const opacity = opacityAccessor(node) || .75;
-            console.log('color', color, opacity)
             if (!sphereMaterials.hasOwnProperty(color)) {
                 sphereMaterials[color] = new THREE.MeshLambertMaterial({
                     color: colorStr2Hex(color || '#ffffaa'),
