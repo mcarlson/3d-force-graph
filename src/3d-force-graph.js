@@ -41,6 +41,7 @@ export default Kapsule({
         valField: { default: 'val' },
         nameField: { default: 'name' },
         colorField: { default: 'color' },
+        opacityField: { default: 'opacity' },
         linkSourceField: { default: 'source' },
         linkTargetField: { default: 'target' },
         linkColorField: { default: 'color' },
@@ -192,6 +193,7 @@ export default Kapsule({
         const nameAccessor = accessorFn(state.nameField);
         const valAccessor = accessorFn(state.valField);
         const colorAccessor = accessorFn(state.colorField);
+        const opacityAccessor = accessorFn(state.opacityField);
         let sphereGeometries = {}; // indexed by node value
         let sphereMaterials = {}; // indexed by color
         state.graphData.nodes.forEach(node => {
@@ -201,11 +203,13 @@ export default Kapsule({
             }
 
             const color = colorAccessor(node);
+            const opacity = opacityAccessor(node) || .75;
+            console.log('color', color, opacity)
             if (!sphereMaterials.hasOwnProperty(color)) {
                 sphereMaterials[color] = new THREE.MeshLambertMaterial({
                     color: colorStr2Hex(color || '#ffffaa'),
                     transparent: true,
-                    opacity: 0.75
+                    opacity: opacity
                 });
             }
 
